@@ -35,8 +35,9 @@
         <div class="container mx-auto px-3 h-full xl:w-9/12">
             <div class="flex flex-wrap h-full">
                 <div class="w-1/2 pr-4 self-center text-left GUAYMAS-SONORA "> GUAYMAS · SONORA</div>
-                <div class="w-1/2 pl-4 self-center text-right Annciate-con-nosotros"><a href="">Anúnciate con
-                        nosotros</a></div>
+                <div class="w-1/2 pl-4 self-center text-right Annciate-con-nosotros">
+                    <a href="">Anúnciate con nosotros</a>
+                </div>
             </div>
         </div>
     </footer>
