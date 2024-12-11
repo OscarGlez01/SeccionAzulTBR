@@ -9,7 +9,7 @@ use App\Http\Requests\UpdateCategoriaRequest;
 class CategoriaController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Despliega las categorias disponibles.
      */
     public function index()
     {
@@ -20,7 +20,7 @@ class CategoriaController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Crea una instancia nueva de Categoria y la almacena en la base de datos
      */
     public function store(StoreCategoriaRequest $request)
     {
@@ -28,17 +28,17 @@ class CategoriaController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Despliega la vista para crear una nueva instancia de Categoria
      */
     public function create()
     {
-        //
+        return view('categoria.create');
     }
 
 
 
     /**
-     * Display the specified resource.
+     * Obtiene una sola instancia de categoría y la muestra.
      */
     public function show(Categoria $categoria)
     {
@@ -46,7 +46,7 @@ class CategoriaController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Actualiza una instancia concreta de categoría con nueva data
      */
     public function update(UpdateCategoriaRequest $request, Categoria $categoria)
     {

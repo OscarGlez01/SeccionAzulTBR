@@ -14,6 +14,7 @@
     "Current Password": "Current Password",
     "Dashboard": "Dashboard",
     "Home": "Home",
+    "Category": "Category",
     "Delete Account": "Delete Account",
     "Email": "Email",
     "email": "The :attribute field must be a valid email address.",
