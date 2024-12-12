@@ -8,6 +8,8 @@
     "Already registered?": "Already registered?",
     "Are you sure you want to delete your account?": "Are you sure you want to delete your account?",
     "Cancel": "Cancel",
+    "Create": "Create",
+    "Edit": "Edit",
     "Click here to re-send the verification email.": "Click here to re-send the verification email.",
     "Confirm": "Confirm",
     "Confirm Password": "Confirm Password",
@@ -85,5 +87,7 @@
     "Whoops!": "Whoops!",
     "You are receiving this email because we received a password reset request for your account.": "You are receiving this email because we received a password reset request for your account.",
     "You're logged in!": "You're logged in!",
-    "Your email address is unverified.": "Your email address is unverified."
+    "Your email address is unverified.": "Your email address is unverified.",
+    "Description": "Description",
+    "Actions": "Actions"
 }

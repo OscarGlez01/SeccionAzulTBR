@@ -1,6 +1,10 @@
+@import './crud.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
 
 :root {
     --sunflower-yellow: #f1db00;
@@ -20,6 +24,14 @@ html {
     padding: 0;
     background: #ffffff !important;
 }
+
+/** General purpose button **/
+.btn {
+    @apply font-bold py-2 px-4 rounded;
+    transition: all 0.2s ease-in
+}
+
+/* Legacy CSS */
 
 .searchbar {
     margin-bottom: auto;
@@ -352,8 +364,8 @@ p.descripcion:hover .tooltip {
     color: var(--dark);
 }
 
-.banner_principal.emergencia .icon {
-}
+/* .banner_principal.emergencia .icon {
+} */
 
 .banner_principal.emergencia::after {
     content: "";
