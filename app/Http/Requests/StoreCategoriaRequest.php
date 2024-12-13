@@ -3,6 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Str;
+
 
 class StoreCategoriaRequest extends FormRequest
 {
@@ -11,7 +13,7 @@ class StoreCategoriaRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +24,31 @@ class StoreCategoriaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'nombre' => 'required|string|max:255|unique:categorias,nombre',
+            'descripcion' => 'nullable|string|max:500'
+        ];
+    }
+
+    /**
+     * Input normalization for categoria, it trims white spaces and limit characters up to validation
+     * @return void // no need to return anything as the request entity handles the work
+     */
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'nombre' => Str::limit(ucwords(trim($this->input('nombre'))), 255, ''),
+            'descripcion' => Str::limit(strip_tags(trim($this->input('descripcion'))), 500, ''),
+        ]);
+    }
+
+    /**
+     * Messages for failed or cancelled validations
+     * @return string[]
+     */
+    public function messages()
+    {
+        return [
+            'nombre.unique' => 'El nombre debe ser único. Este nombre esta registrado en la base de datos'
         ];
     }
 }

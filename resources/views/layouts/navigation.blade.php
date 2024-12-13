@@ -9,7 +9,7 @@
                         <div class="flex items-center">
                             <img width="50px" height="auto" src="{{ url('/img/LogoLA_azul.svg') }}" />
                             <h1 class="text-2xl text-black dark:text-gray-50">
-                                Directorio
+                                Directorio &#8226; Admin Panel
                             </h1>
                         </div>
                     </a>
@@ -28,7 +28,7 @@
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
-                <!-- Add this button right here -->
+                <!-- Theme Toogle Button -->
                 <button id="theme-toggle" type="button"
                     class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 mx-4">
                     <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20"

@@ -1,10 +1,9 @@
-@import './crud.css';
+@import "./crud.css";
+@import "./menus.css";
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-
 
 :root {
     --sunflower-yellow: #f1db00;
@@ -25,10 +24,20 @@ html {
     background: #ffffff !important;
 }
 
+.home-index {
+    height: 90dvh;
+    @apply xs:h-5/6;
+}
+
 /** General purpose button **/
 .btn {
     @apply font-bold py-2 px-4 rounded;
-    transition: all 0.2s ease-in
+    transition: all 0.2s ease-in;
+}
+
+.btn-mini {
+    @apply font-bold py-2 px-2 rounded me-1 inline-flex;
+    transition: all 0.2s ease-in;
 }
 
 /* Legacy CSS */
@@ -69,6 +78,12 @@ html {
     font-size: 21px;
 }
 
+/* tailwind dark-mode */
+.searchbar > .search_icon {
+    @apply hover:bg-slate-900 hover:text-gray-100 dark:bg-slate-900 dark:hover:bg-gray-100 dark:hover:text-slate-900;
+    transition: all 0.2s ease-in;
+}
+
 .search_icon {
     height: 40px;
     width: 40px;
@@ -95,26 +110,12 @@ html {
     width: 300px;
 }
 
-.footer {
-    height: 70px;
-    width: 100%;
-    background-color: var(--sunflower-yellow);
-    bottom: 0;
-}
-
-.footer.index {
-    /*
-position: absolute;
-bottom: 0;
-*/
-    height: 10vh;
-}
-
 .explorar {
     margin-top: 10vh;
 }
 
 .btn-amarillo {
+    @apply dark:bg-slate-900 dark:text-gray-400 dark:hover:bg-gray-100 dark:hover:text-slate-900;
     background: var(--sunflower-yellow);
     border-color: var(--sunflower-yellow);
     color: var(--brownish-grey);
@@ -126,7 +127,6 @@ bottom: 0;
     font-weight: 600;
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
         border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-
     border: solid 1px transparent;
 }
 
@@ -136,21 +136,41 @@ bottom: 0;
     color: #ffffff;
 }
 
-.GUAYMAS-SONORA {
-    font-size: 16px;
-    font-weight: bold;
-    color: var(--dark);
+/** FOOTER INICIO **/
+
+.footer {
+    @apply dark:bg-slate-900 dark:text-gray-400 xs:h-40;
+    height: 10dvh;
+    width: 100%;
+    background-color: var(--sunflower-yellow);
+    bottom: 0;
+    display: flex;
+}
+
+.footer > h1,
+.footer > text,
+.footer > p,
+.footer > i {
+    @apply dark:text-gray-400;
 }
 
 .Annciate-con-nosotros {
+    @apply dark:text-gray-400 dark:hover:text-slate-900;
     text-decoration: none;
     font-size: 15px;
     color: var(--dark);
 }
 
 .Annciate-con-nosotros a {
+    @apply dark:text-gray-400 dark:hover:text-slate-900;
     color: var(--dark);
 }
+
+.GUAYMAS-SONORA {
+    font-weight: bold;
+}
+
+/* SECCION DE CATÁLOGO */
 
 .header_search {
     background-color: var(--dark);
@@ -363,9 +383,6 @@ p.descripcion:hover .tooltip {
 .banner_principal.emergencia .descripcion {
     color: var(--dark);
 }
-
-/* .banner_principal.emergencia .icon {
-} */
 
 .banner_principal.emergencia::after {
     content: "";

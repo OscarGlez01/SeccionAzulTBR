@@ -15,6 +15,6 @@ class Categoria extends Model
         'descripcion'
     ];
 
-    protected $primaryKey = "address_id";
+    protected $primaryKey = "categoria_id";
 
 }

@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Generic Highlight */
+.highlight-element {
+    @apply hover:bg-black hover:bg-opacity-15 dark:hover:bg-white dark:hover:bg-opacity-100;
+    transition: all 0.2s ease-in;
+}
+/* LOGIN MENU */
+
+
+
+/* CATALOUGE MENU */

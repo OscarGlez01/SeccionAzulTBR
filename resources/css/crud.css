@@ -1,7 +1,3 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 /* CRUD BUTTONS */
 
 .btn-add {
@@ -9,9 +5,42 @@
 }
 
 .btn-add:hover {
-    @apply bg-indigo-50 text-sky-400 border border-sky-800;
+    @apply bg-indigo-100 text-sky-400 border border-sky-800;
 }
 
+.btn-cancel {
+    @apply bg-red-500 border text-white;
+}
+
+.btn-cancel:hover {
+    @apply bg-red-100 text-red-600 border border-red-500;
+}
+
+.btn-warning {
+    @apply bg-yellow-500 border text-black;
+}
+
+.btn-warning:hover {
+    @apply bg-yellow-100 text-black border border-yellow-500;
+}
+
+/* Tables */
+.crud-table th {
+    @apply border-b dark:border-slate-600 font-medium p-4 pl-8 pt-0 pb-3 text-slate-400 dark:text-slate-200 text-left;
+}
+
+.crud-table tbody {
+    @apply bg-white dark:bg-slate-800;
+}
+
+.crud-table td {
+    @apply border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400;
+}
+
+/* Forms */
+form.form-crud {
+    @apply rounded border px-8 pt-6 pb-8 mb-4 bg-gray-100 border-gray-400 dark:bg-slate-900 dark:border-neutral-400;
+}
 
 /* CRUD INPUTS AND LABELS */
 

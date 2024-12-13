@@ -24,7 +24,9 @@ class CategoriaController extends Controller
      */
     public function store(StoreCategoriaRequest $request)
     {
-        //
+        $categoria = Categoria::create($request->validated());
+        
+        return to_route('categorias.index', $categoria)->with('message','Categoria Añadida.');
     }
 
     /**

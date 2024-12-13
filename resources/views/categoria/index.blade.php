@@ -8,13 +8,13 @@
         <a href="{{ route('categorias.create') }}" class="btn btn-add">Registrar</a>
         <hr class="my-4">
         <div class="">
-            <table class="table-auto w-full text-left rtl:text-right">
+            <table class="table-auto w-full text-left rtl:text-right crud-table">
                 <thead class="">
                     <tr>
                         <th>ID</th>
-                        <th>{{__('Name')}}</th>
-                        <th>{{__('Description')}}</th>
-                        <th>{{__('Actions')}}</th>
+                        <th>{{ __('Name') }}</th>
+                        <th>{{ __('Description') }}</th>
+                        <th>{{ __('Actions') }}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -23,12 +23,13 @@
                             <td>{{ $categoria->categoria_id }} </td>
                             <td>{{ $categoria->nombre }} </td>
                             <td>{{ $categoria->descripcion }} </td>
-                            <td>
-                                <a href="{{ route('destroy.categoria', $categoria->categoria_id) }}"
-                                    class="btn btn-danger" onclick="return confirm('¿Seguro deseas eliminarlo?')"><i
-                                        class="far fa-trash-alt"></i></a>
-                                <a href="{{ route('edit.categoria', $categoria->categoria_id) }}"
-                                    class="btn btn-warning"><i class="far fa-edit"></i></a>
+                            <td> 
+                                <a href="" class="btn-mini btn-cancel">
+                                    <i class="fa-solid fa-trash"></i>
+                                </a>
+                                <a href="" class="btn-mini btn-warning">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </a>
                             </td>
                         </tr>
                     @endforeach
