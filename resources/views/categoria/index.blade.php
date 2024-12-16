@@ -4,10 +4,10 @@
             {{ __('Category') }}
         </h2>
     </x-slot>
-    <div class="mx-auto my-5 max-w-screen-lg">
+    <div class="mx-auto my-5 max-w-screen-lg xs:max-w-screen-sm ">
         <a href="{{ route('categorias.create') }}" class="btn btn-add">Registrar</a>
-        <hr class="my-4">
-        <div class="">
+        <hr class="my-4 xs:border-transparent">
+        <div class="overflow-auto">
             <table class="table-auto w-full text-left rtl:text-right crud-table">
                 <thead class="">
                     <tr>
@@ -23,7 +23,7 @@
                             <td>{{ $categoria->categoria_id }} </td>
                             <td>{{ $categoria->nombre }} </td>
                             <td>{{ $categoria->descripcion }} </td>
-                            <td> 
+                            <td>
                                 <a href="" class="btn-mini btn-cancel">
                                     <i class="fa-solid fa-trash"></i>
                                 </a>

@@ -25,8 +25,8 @@ class CategoriaController extends Controller
     public function store(StoreCategoriaRequest $request)
     {
         $categoria = Categoria::create($request->validated());
-        
-        return to_route('categorias.index', $categoria)->with('message','Categoria Añadida.');
+
+        return to_route('categorias.index', $categoria)->with('message', 'Categoria Añadida.');
     }
 
     /**
@@ -40,7 +40,7 @@ class CategoriaController extends Controller
 
 
     /**
-     * Obtiene una sola instancia de categoría y la muestra.
+     * Obtiene una sola instancia de categoría y la muestra, así cómo sus sub-categorias.
      */
     public function show(Categoria $categoria)
     {
@@ -52,7 +52,9 @@ class CategoriaController extends Controller
      */
     public function update(UpdateCategoriaRequest $request, Categoria $categoria)
     {
-        //
+        $categoria->update($request->validated());
+
+        return to_route('categorias.index');
     }
 
     /**
@@ -60,7 +62,7 @@ class CategoriaController extends Controller
      */
     public function edit(Categoria $categoria)
     {
-        //
+        return view('categoria.edit', ['articulo' => $categoria]);
     }
 
 
@@ -70,6 +72,10 @@ class CategoriaController extends Controller
      */
     public function destroy(Categoria $categoria)
     {
-        //
+        $this->authorize('delete', $categoria);
+
+        $categoria->delete();
+
+        return [to_route('categorias.index'), response()->json(['message' => 'Resource deleted successfully.'], 200)];
     }
 }

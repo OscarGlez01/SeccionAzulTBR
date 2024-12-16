@@ -8,7 +8,7 @@
                     <a href="{{ route('dashboard') }}">
                         <div class="flex items-center">
                             <img width="50px" height="auto" src="{{ url('/img/LogoLA_azul.svg') }}" />
-                            <h1 class="text-2xl text-black dark:text-gray-50">
+                            <h1 class="text-2xl xs:text-lg text-black dark:text-gray-50">
                                 Directorio &#8226; Admin Panel
                             </h1>
                         </div>
@@ -99,6 +99,9 @@
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Home') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('categorias.index')" :active="request()->routeIs('categorias.index')">
+                {{ __('Category') }}
             </x-responsive-nav-link>
         </div>
 
