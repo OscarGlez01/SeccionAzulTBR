@@ -1,11 +1,11 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Category') }}
+            {{ __('Sub-Category') }}
         </h2>
     </x-slot>
-    <div class="mx-auto my-5 lg:mx-auto md:w-screen max-w-screen-lg xs:max-w-screen-sm fadding-in ">
-        <a href="{{ route('categorias.create') }}" class="btn btn-add ms-4 xl:ms-0">Registrar</a>
+    <div class="mx-auto my-5 max-w-screen-lg xs:max-w-screen-sm fadding-in ">
+        <a href="{{ route('subcategorias.create') }}" class="btn btn-add">Registrar</a>
         <hr class="my-4 xs:border-transparent">
         <div class="overflow-auto">
             <table class="table-auto w-full text-left rtl:text-right crud-table">
@@ -13,22 +13,24 @@
                     <tr class="">
                         <th>{{ __('Name') }}</th>
                         <th>{{ __('Description') }}</th>
+                        <th>{{ __('Category') }}</th>
                         <th>{{ __('Actions') }}</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($categorias as $categoria)
+                    @foreach ($subcategorias as $subcategoria)
                         <tr class="content-row">
-                            <td>{{ $categoria->nombre }} </td>
-                            <td>{{ $categoria->descripcion }} </td>
+                            <td>{{ $subcategoria->nombre }} </td>
+                            <td>{{ $subcategoria->descripcion }} </td>
+                            <td>{{ $subcategoria->categoria->nombre ?? '---' }}</td>
                             <td>
-                                <div style="cursor: pointer;" class="inline-flex" x-data="{ categoria: {{ $categoria }} }">
+                                <div style="cursor: pointer;" class="inline-flex" x-data="{ subcategoria: {{ $subcategoria }} }">
                                     <a type="button" class="btn-mini btn-cancel"
-                                        x-on:click="$dispatch('open-modal', 'delete-categoria-registry'); $dispatch('categoria', categoria)">
+                                        x-on:click="$dispatch('open-modal', 'delete-subcategoria-registry'); $dispatch('subcategoria', subcategoria)">
                                         <i class="fa-solid fa-trash"></i>
                                     </a>
                                 </div>
-                                <a href="{{ route('categorias.edit', $categoria) }}" class="btn-mini btn-warning">
+                                <a href="{{ route('subcategorias.edit', $subcategoria) }}" class="btn-mini btn-warning">
                                     <i class="fa-solid fa-pen-to-square"></i>
                                 </a>
                             </td>
@@ -38,7 +40,7 @@
             </table>
         </div>
         <div class="d-flex justify-content-center">
-            {{ $categorias->links() }}
+            {{ $subcategorias->links() }}
         </div>
     </div>
 
@@ -54,12 +56,12 @@
 
     <!-- Modal para borrar un registro -->
     <div x-data="{
-        categoria: { categoria_id: null },
+        subcategoria: { subcategoria_id: null },
         get deletionRoute() {
-            return `/categorias/${this.categoria.categoria_id}`;
+            return `/subcategorias/${this.subcategoria.subcategoria_id}`;
         }
-    }" @categoria.window="categoria = $event.detail" class="space-y-6">
-        <x-modal name="delete-categoria-registry" :show="false" class="" focusable>
+    }" @subcategoria.window="subcategoria = $event.detail" class="space-y-6">
+        <x-modal name="delete-subcategoria-registry" :show="false" class="" focusable>
             <form :action="deletionRoute" method="POST" class="p-6 dark:text-gray-100">
                 @csrf
                 @method('DELETE')
@@ -71,7 +73,7 @@
                     <br>
                     <h4 class="text-slate-900 dark:text-gray-100 capitalize">
                         {{ __('Name') }}</h4>
-                    <p x-text="categoria.nombre"></p>
+                    <p x-text="subcategoria.nombre"></p>
                     <div class="mt-6 flex justify-end">
                         <button type="submit" class="btn-mini btn-cancel">
                             {{ __('Delete') }}

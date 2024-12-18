@@ -34,12 +34,20 @@
 }
 
 .crud-table td {
-    @apply border-b border-slate-100 dark:border-slate-700 p-4 pl-8 text-slate-500 dark:text-slate-400;
+    @apply border-b border-slate-100 dark:border-slate-700 p-4 pl-8;
+}
+
+.crud-table tr.content-row {
+    @apply text-slate-500 dark:text-slate-400
+}
+
+.crud-table tr:hover.content-row {
+    @apply transition-all duration-200 bg-slate-200 dark:text-black
 }
 
 /* Forms */
 form.form-crud {
-    @apply rounded border px-8 pt-6 pb-8 mb-4 bg-gray-100 border-gray-400 dark:bg-slate-900 dark:border-neutral-400;
+    @apply rounded border px-8 pt-6 pb-8 mb-4 bg-gray-50 border-gray-400 dark:bg-slate-800 dark:border-neutral-400;
 }
 
 /* CRUD INPUTS AND LABELS */
@@ -48,6 +56,22 @@ form.form-crud {
     @apply block text-gray-700 text-sm font-bold mb-2 dark:text-white;
 }
 
-input[type="text"].form-crud-input {
+input[type="text"].form-crud-input, select.form-crud-input {
     @apply shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:ring;
+}
+
+
+.fadding-in {
+    animation: fade-in 0.5s ease;
+}
+
+@keyframes fade-in {
+    from {
+        transform: translateY(10%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }

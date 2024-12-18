@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
 
-    <div class="mx-auto my-5 max-w-screen-lg">
+    <div class="mx-auto my-5 max-w-screen-lg fadding-in">
         <h1 class="text-xl text-black dark:text-white ">Añadir un registro</h1>
         <hr class="my-4 border-gray-800 dark:border-neutral-400">
         <form action="{{ route('categorias.store') }}" method="POST" class="form-crud">

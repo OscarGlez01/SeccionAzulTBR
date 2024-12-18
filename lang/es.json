@@ -18,6 +18,7 @@
     "Dashboard": "Panel",
     "Home": "Inicio",
     "Category": "Categoria",
+    "Sub-Category": "Sub-Categoría",
     "Delete Account": "Borrar cuenta",
     "Email": "Correo electrónico",
     "email": "El campo :attribute no es un correo válido.",

@@ -24,8 +24,20 @@ class CategoriaController extends Controller
      */
     public function store(StoreCategoriaRequest $request)
     {
-        $categoria = Categoria::create($request->validated());
-
+        try {
+            if ($categoria = Categoria::create($request->validated())) {
+                // Update is successful
+                session()->flash('message', 'Categoría creada con exito.');
+                session()->flash('alert-class', 'success');
+            } else {
+                // Failsafe: Something's wrong
+                session()->flash('message', 'Fallo al crear la categoría.');
+                session()->flash('alert-class', 'error');
+            }
+        } catch (\Exception $e) {
+            session()->flash('message', 'Ocurrió un error: ' . $e->getMessage());
+            session()->flash('alert-class', 'error');
+        }
         return to_route('categorias.index', $categoria)->with('message', 'Categoria Añadida.');
     }
 
@@ -52,8 +64,21 @@ class CategoriaController extends Controller
      */
     public function update(UpdateCategoriaRequest $request, Categoria $categoria)
     {
-        $categoria->update($request->validated());
-
+        try {
+            if ($categoria->update($request->validated())) {
+                // Update is successful
+                session()->flash('message', 'Categoría actualizada con exito.');
+                session()->flash('alert-class', 'success');
+            } else {
+                // Failsafe: Something's wrong
+                session()->flash('message', 'Fallo al editar la categoría.');
+                session()->flash('alert-class', 'error');
+            }
+        } catch (\Exception $e) {
+            // Handle exceptions
+            session()->flash('message', 'Ocurrió un error: ' . $e->getMessage());
+            session()->flash('alert-class', 'error');
+        }
         return to_route('categorias.index');
     }
 
@@ -73,8 +98,22 @@ class CategoriaController extends Controller
     public function destroy(Categoria $categoria)
     {
 
-        $categoria->delete();
+        try {
+            if ($categoria->delete()) {
+                // Delete is successful
+                session()->flash('message', 'Categoría elimininada con exito.');
+                session()->flash('alert-class', 'success');
+            } else {
+                // Failsafe: Something's wrong
+                session()->flash('message', 'Fallo al borrar la categoría.');
+                session()->flash('alert-class', 'error');
+            }
+        } catch (\Exception $e) {
+            // Handle exceptions
+            session()->flash('message', 'Ocurrió un error: ' . $e->getMessage());
+            session()->flash('alert-class', 'error');
+        }
 
-        return view('categoria.index');
+        return redirect()->route('categorias.index');
     }
 }

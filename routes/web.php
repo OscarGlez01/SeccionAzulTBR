@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SubcategoriaController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -19,6 +20,7 @@ Route::middleware('auth')->group(function () {
 
 
     Route::resource('categorias', CategoriaController::class);
+    Route::resource('subcategorias', SubcategoriaController::class);
 
 });
 

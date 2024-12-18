@@ -8,7 +8,7 @@
                     <a href="{{ route('dashboard') }}">
                         <div class="flex items-center">
                             <img width="50px" height="auto" src="{{ url('/img/LogoLA_azul.svg') }}" />
-                            <h1 class="text-2xl xs:text-lg text-black dark:text-gray-50">
+                            <h1 class="text-2xl md:text-sm md:max-w-28 ms-2 lg:text-lg lg:max-w-full text-black dark:text-gray-50">
                                 Directorio &#8226; Admin Panel
                             </h1>
                         </div>
@@ -20,8 +20,14 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Home') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('categorias.index')" :active="request()->routeIs('negocios.index')">
+                        {{ __('Business') }}
+                    </x-nav-link>
                     <x-nav-link :href="route('categorias.index')" :active="request()->routeIs('categorias.index')">
                         {{ __('Category') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('subcategorias.index')" :active="request()->routeIs('subcategorias.index')">
+                        {{ __('Sub-Category') }}
                     </x-nav-link>
                 </div>
             </div>
@@ -100,8 +106,14 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Home') }}
             </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('categorias.index')" :active="request()->routeIs('negocios.index')">
+                {{ __('Business') }}
+            </x-responsive-nav-link>
             <x-responsive-nav-link :href="route('categorias.index')" :active="request()->routeIs('categorias.index')">
                 {{ __('Category') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('subcategorias.index')" :active="request()->routeIs('subcategorias.index')">
+                {{ __('Sub-Category') }}
             </x-responsive-nav-link>
         </div>
 

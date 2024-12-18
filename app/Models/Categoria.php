@@ -17,4 +17,9 @@ class Categoria extends Model
 
     protected $primaryKey = "categoria_id";
 
+    public function subcategories()
+    {
+        return $this->hasMany(Subcategoria::class, 'categoria_id');
+    }
+
 }

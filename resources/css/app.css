@@ -24,6 +24,27 @@ html {
     background: #ffffff !important;
 }
 
+.toast {
+    animation: slide-in 0.5s ease, fade-out 0.5s ease 4.5s;
+}
+
+@keyframes slide-in {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fade-out {
+    to {
+        opacity: 0;
+    }
+}
+
 .home-index {
     height: 90dvh;
     @apply xs:h-5/6;
