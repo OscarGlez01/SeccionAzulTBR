@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Categoria;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateCategoriaRequest extends StoreCategoriaRequest
@@ -12,7 +13,7 @@ class UpdateCategoriaRequest extends StoreCategoriaRequest
         $rules = parent::rules(); // Inherit rules from StoreRequest
 
         // Adjust 'name' rule to exclude the current record
-        $rules['nombre'] = 'sometimes|string|max:255|unique:categorias,nombre,' . $this->route('id_categoria');
+        $rules['nombre'] = 'sometimes|string|max:255|unique:categorias,nombre,' . $this->route('categoria')->categoria_id . ',categoria_id';
 
         return $rules;
     }

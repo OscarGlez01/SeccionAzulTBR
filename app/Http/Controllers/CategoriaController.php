@@ -62,7 +62,7 @@ class CategoriaController extends Controller
      */
     public function edit(Categoria $categoria)
     {
-        return view('categoria.edit', ['articulo' => $categoria]);
+        return view('categoria.edit', ['categoria' => $categoria]);
     }
 
 
@@ -72,10 +72,9 @@ class CategoriaController extends Controller
      */
     public function destroy(Categoria $categoria)
     {
-        $this->authorize('delete', $categoria);
 
         $categoria->delete();
 
-        return [to_route('categorias.index'), response()->json(['message' => 'Resource deleted successfully.'], 200)];
+        return view('categoria.index');
     }
 }

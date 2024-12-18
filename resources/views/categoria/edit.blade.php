@@ -16,17 +16,16 @@
                     {{ __('Name') }}
                 </label>
                 <input class="form-crud-input" id="nombre" name="nombre" type="text"
-                    :value={{ $categoria->nombre }} />
+                    value="{{$categoria->nombre}}"></input>
             </div>
             <div class="mb-4">
                 <label class="form-crud-label" for="descripcion">
                     {{ __('Description') }}
                 </label>
-                <input class="form-crud-input" id="descripcion" name="descripcion" type="text"
-                    :value={{ $categoria->descripcion }} />
+                <input class="form-crud-input" id="descripcion" name="descripcion" type="text" value="{{$categoria->descripcion}}" />
             </div>
             <div class="mb-2">
-                <button type="submit" class="btn btn-add">{{ __('Edit') }}</button>
+                <button type="submit" class="btn btn-warning">{{ __('Edit') }}</button>
                 <a href="{{ route('categorias.index') }}">
                     <button type="button" class="btn btn-cancel"> {{ __('Cancel') }} </button>
                 </a>
