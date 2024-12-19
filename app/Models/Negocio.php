@@ -16,18 +16,30 @@ class Negocio extends Model
         'ubicacion',
         'telefono',
         'whatsapp',
-        'direccion',
         'facebook',
         'instagram',
-        'horarios'
-        
+        'horarios',
+        'estado',
+        'imagen',
+        'categoria_id'
+
     ];
 
     protected $primaryKey = "negocio_id";
 
+    // Se establece la relación entre categoría y negocio (cada negocio cuenta con una categoría)
+    public function categoria()
+    {
+        return $this->belongsTo(Categoria::class);
+    }
     public function subcategorias()
     {
-        return $this->belongsTo(Subcategoria::class, 'subcategoria_id');
+        return $this->belongsToMany(Subcategoria::class, 'negocio_subcategoria');
+    }
+
+    public function getImagenAttribute($value)
+    {
+        return $value ?: '/public/img/Thumbail_Negocio.png';
     }
 
 }

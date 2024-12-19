@@ -20,7 +20,7 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Home') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('categorias.index')" :active="request()->routeIs('negocios.index')">
+                    <x-nav-link :href="route('negocios.index')" :active="request()->routeIs('negocios.index')">
                         {{ __('Business') }}
                     </x-nav-link>
                     <x-nav-link :href="route('categorias.index')" :active="request()->routeIs('categorias.index')">

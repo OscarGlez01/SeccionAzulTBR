@@ -19,6 +19,7 @@
     "Home": "Home",
     "Category": "Category",
     "Sub-Category": "Sub-Category",
+    "Business": "Business",
     "Delete Account": "Delete Account",
     "Email": "Email",
     "email": "The :attribute field must be a valid email address.",

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\NegocioController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SubcategoriaController;
 use Illuminate\Support\Facades\Route;
@@ -21,6 +22,7 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('categorias', CategoriaController::class);
     Route::resource('subcategorias', SubcategoriaController::class);
+    Route::resource('negocios', NegocioController::class);
 
 });
 

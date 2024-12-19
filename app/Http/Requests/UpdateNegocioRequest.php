@@ -4,25 +4,36 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateNegocioRequest extends FormRequest
+class UpdateNegocioRequest extends StoreNegocioRequest
 {
     /**
-     * Determine if the user is authorized to make this request.
-     */
-    public function authorize(): bool
-    {
-        return false;
-    }
-
-    /**
-     * Get the validation rules that apply to the request.
-     *
+     * Summary of rules
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
     public function rules(): array
     {
-        return [
-            //
-        ];
+        $rules = parent::rules();
+
+        // Adjust 'name' rule to exclude the current record
+        $rules['nombre'] = 'sometimes|required|string|max:255';
+        $rules['categoria_id'] = 'nullable|exists:categorias,categoria_id';
+
+        return $rules;
+    }
+
+    public function prepareForValidation()
+    {
+        $this->merge([
+            'telefono' => $this->sanitizePhoneNumber($this->telefono),
+            'whatsapp' => $this->sanitizePhoneNumber($this->whatsapp),
+            'nombre' => trim($this->nombre),
+        ]);
+    }
+
+    public function messages()
+    {
+        $messages = parent::messages();
+
+        return $messages;
     }
 }
