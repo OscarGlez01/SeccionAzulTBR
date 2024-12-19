@@ -38,19 +38,17 @@ class NegocioController extends Controller
             );
 
             $negocio = Negocio::create($data);
-            session()->flash('message', 'Negocio creado con exito');
+
+            session()->flash('message', 'Negocio creado con éxito');
             session()->flash('alert-class', 'success');
         } catch (\Exception $e) {
             session()->flash('message', 'Ocurrió un error: ' . $e->getMessage());
             session()->flash('alert-class', 'error');
+            return to_route('negocios.index');
         }
 
-        // 6. Return response with redirection
-        return to_route('negocios.index')->with('message', 'Negocio añadido.');
+        return to_route('negocios.index', ['negocio' => $negocio])->with('message');
     }
-
-
-
 
 
     /**

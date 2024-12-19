@@ -30,7 +30,7 @@ class Negocio extends Model
     // Se establece la relación entre categoría y negocio (cada negocio cuenta con una categoría)
     public function categoria()
     {
-        return $this->belongsTo(Categoria::class);
+        return $this->belongsTo(Categoria::class, 'categoria_id');
     }
     public function subcategorias()
     {
