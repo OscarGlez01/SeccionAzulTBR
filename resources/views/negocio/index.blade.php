@@ -23,7 +23,16 @@
                 <tbody>
                     @foreach ($negocios as $negocio)
                         <tr class="content-row">
-                            <td>{{ $negocio->estado }} </td>
+                            <td>
+                                <div class="relative inline-block ">
+                                    <input
+                                        class="checkbox-toggle peer h-6 w-12 cursor-pointer appearance-none rounded-full border border-black dark:border-white checked:border-black focus:checked:border-black dark:checked:border-white bg-transparent"
+                                        type="checkbox"
+                                        value="{{$negocio->estado}}">
+                                    <span
+                                        class="peerless pointer-events-none absolute left-1 top-[5px] block h-4 w-4 rounded-full transition-all duration-200 peer-checked:left-7 bg-slate-600 dark:bg-slate-400 peer-checked:bg-white"></span>
+                                </div>
+                            </td>
                             <td>{{ $negocio->nombre }} </td>
                             <td>{{ $negocio->ubicacion }}</td>
                             <td>{{ $negocio->categoria->nombre ?? '---' }}</td>

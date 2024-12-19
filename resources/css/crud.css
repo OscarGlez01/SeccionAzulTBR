@@ -60,6 +60,19 @@ select.form-crud-input, input.form-crud-input, textarea.form-crud-input {
     @apply shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:ring;
 }
 
+input[type='checkbox'].checkbox-toggle, input[type='checkbox'].checkbox-toggle:checked {
+    @apply dark:border-white;
+    background-image: none;
+    background-color: transparent;
+}
+
+input[type='checkbox'].checkbox-toggle:checked:hover, tr:hover input[type='checkbox'].checkbox-toggle{
+    @apply border-black bg-transparent dark:border-black;
+}
+
+tr:hover span.peerless {
+    @apply dark:bg-slate-700 dark:peer-checked:bg-black;
+}
 
 .fadding-in {
     animation: fade-in 0.5s ease;
