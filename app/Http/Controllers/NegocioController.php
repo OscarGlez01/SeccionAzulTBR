@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Categoria;
+use App\Models\Subcategoria;
 use App\Models\Negocio;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreNegocioRequest;
@@ -79,7 +80,10 @@ class NegocioController extends Controller
     public function edit(Negocio $negocio)
     {
         $categorias = Categoria::all();
-        return view('negocio.edit', ['negocio' => $negocio, 'categorias' => $categorias]);
+        $subcategorias = Subcategoria::where('categoria_id', $negocio->categoria_id)
+            ->orWhere('categoria_id', null)
+            ->get();
+        return view('negocio.edit', ['negocio' => $negocio, 'categorias' => $categorias, 'subcategorias' => $subcategorias]);
     }
 
     /**
@@ -94,7 +98,7 @@ class NegocioController extends Controller
                 ['imagen' => $imagePath]
             );
 
-            $negocio -> update($data);
+            $negocio->update($data);
             session()->flash('message', 'Negocio creado con exito');
             session()->flash('alert-class', 'success');
         } catch (\Exception $e) {
@@ -146,7 +150,7 @@ class NegocioController extends Controller
             }
 
             // Store the new image in the public storage folder 'images'
-            return $request->file('imagen')->store('images', 'public');   
+            return $request->file('imagen')->store('images', 'public');
         } else {
             return $negocio ? $negocio->imagen : null; // For update, keep the old image if not updated
         }

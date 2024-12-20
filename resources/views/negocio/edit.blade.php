@@ -104,16 +104,26 @@
                     <label class="form-crud-label" for="facebook">
                         {{ __('Facebook') }}
                     </label>
-                    <input value="{{$negocio->facebook}}" class="form-crud-input" id="facebook" name="facebook" type="text"
-                        placeholder="Página de Facebook activa, de tenerla" />
+                    <input value="{{ $negocio->facebook }}" class="form-crud-input" id="facebook" name="facebook"
+                        type="text" placeholder="Página de Facebook activa, de tenerla" />
                 </div>
                 <div class="w-1/2 mb-4">
                     <label class="form-crud-label" for="instagram">
                         {{ __('Instagram') }}
                     </label>
-                    <input value="{{$negocio->instagram}}" class="form-crud-input" id="instagram" name="instagram" type="text"
-                        placeholder="Página de Instragram activa, de tenerla" />
+                    <input value="{{ $negocio->instagram }}" class="form-crud-input" id="instagram"
+                        name="instagram" type="text" placeholder="Página de Instragram activa, de tenerla" />
                 </div>
+            </div>
+            <div>
+                <label for="subcategorias" class="form-crud-label">Etiquetas:</label>
+                <select class="form-crud-input" id="subcategorias" name="subcategorias[]" multiple>
+                    @foreach ($subcategorias as $subcategoria)
+                        <option value="{{ $subcategoria->subcategoria_id }}">
+                            {{ $subcategoria->nombre }}
+                        </option>
+                    @endforeach
+                </select>
             </div>
             <div class="mb-2">
                 <button type="submit" class="btn btn-add">{{ __('Edit') }}</button>
