@@ -17,6 +17,8 @@ class UpdateNegocioRequest extends StoreNegocioRequest
         // Adjust 'name' rule to exclude the current record
         $rules['nombre'] = 'sometimes|required|string|max:255';
         $rules['categoria_id'] = 'nullable|exists:categorias,categoria_id';
+        $rules['estado'] = 'sometimes|required|in:activo,inactivo';
+
 
         return $rules;
     }
@@ -35,5 +37,10 @@ class UpdateNegocioRequest extends StoreNegocioRequest
         $messages = parent::messages();
 
         return $messages;
+    }
+
+    private function sanitizePhoneNumber($number)
+    {
+        return $number ? preg_replace('/\D/', '', $number) : null;
     }
 }

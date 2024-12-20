@@ -13,10 +13,9 @@
                     <tr class="">
                         <th>{{ __('Status') }}</th>
                         <th>{{ __('Name') }}</th>
-                        <th>{{ __('Location') }}</th>
+                        <th>{{ __('Telephone Number') }}</th>
                         <th>{{ __('Category') }}</th>
-                        <th>{{ __('Phone Number') }}</th>
-                        <th>{{ __('Facebook') }} </th>
+                        <th>{{ __('Logo') }} </th>
                         <th>{{ __('Actions') }}</th>
                     </tr>
                 </thead>
@@ -24,20 +23,26 @@
                     @foreach ($negocios as $negocio)
                         <tr class="content-row">
                             <td>
-                                <div class="relative inline-block ">
-                                    <input
-                                        class="checkbox-toggle peer h-6 w-12 cursor-pointer appearance-none rounded-full border border-black dark:border-white checked:border-black focus:checked:border-black dark:checked:border-white bg-transparent"
-                                        type="checkbox"
-                                        value="{{$negocio->estado}}">
-                                    <span
-                                        class="peerless pointer-events-none absolute left-1 top-[5px] block h-4 w-4 rounded-full transition-all duration-200 peer-checked:left-7 bg-slate-600 dark:bg-slate-400 peer-checked:bg-white"></span>
-                                </div>
+                                <form method="POST" action="{{ route('negocios.toggleEstado', $negocio->negocio_id) }}"
+                                    id="status-form-{{ $negocio->negocio_id }}">
+                                    @csrf
+                                    @method('PATCH')
+                                    <div class="relative inline-block">
+                                        <input type="hidden" name="estado"
+                                            value="{{ $negocio->estado === 'activo' ? 'inactivo' : 'activo' }}">
+                                        <input type="checkbox" id="status-checkbox-{{ $negocio->negocio_id }}"
+                                            @checked($negocio->estado === 'activo')
+                                            onchange="document.getElementById('status-form-{{ $negocio->negocio_id }}').submit();"
+                                            class="checkbox-toggle peer h-6 w-12 cursor-pointer appearance-none rounded-full border border-black dark:border-white checked:border-black focus:checked:border-black dark:checked:border-white bg-transparent">
+                                        <span
+                                            class="peerless pointer-events-none absolute left-1 top-[5px] block h-4 w-4 rounded-full transition-all duration-200 peer-checked:left-7 bg-slate-600 dark:bg-slate-400 peer-checked:bg-cyan-800 dark:peer-checked:bg-white"></span>
+                                    </div>
+                                </form>
                             </td>
                             <td>{{ $negocio->nombre }} </td>
-                            <td>{{ $negocio->ubicacion }}</td>
-                            <td>{{ $negocio->categoria->nombre ?? '---' }}</td>
                             <td>{{ $negocio->telefono }}</td>
-                            <td>{{ $negocio->facebook }}</td>
+                            <td>{{ $negocio->categoria->nombre ?? '---' }}</td>
+                            <td><img width="60" height="auto" class="rounded" src="{{ asset('storage/' . $negocio->imagen) }}" alt="img#{{ $negocio->negocio_id }}" /></td>
                             <td>
                                 <div style="cursor: pointer;" class="inline-flex" x-data="{ negocio: {{ $negocio }} }">
                                     <a type="button" class="btn-mini btn-cancel"

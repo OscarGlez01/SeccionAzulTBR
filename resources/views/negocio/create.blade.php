@@ -8,7 +8,7 @@
     <div class="mx-auto my-5 max-w-screen-lg fadding-in">
         <h1 class="text-xl text-black dark:text-white ">Añadir un registro</h1>
         <hr class="my-4 border-gray-800 dark:border-neutral-400">
-        <form action="{{ route('negocios.store') }}" method="POST" class="form-crud">
+        <form action="{{ route('negocios.store') }}" method="POST" enctype="multipart/form-data" class="form-crud">
             @csrf
             <div class="flex w-full gap-3">
                 <div class=" w-1/2 mb-4">
@@ -70,7 +70,7 @@
             </div>
             <div class="mb-4">
                 <label class="form-crud-label" for="imagen">{{ __('Image') }}</label>
-                <input class="form-crud-input" id="imagen" name="imagen" type="file">
+                <input class="form-crud-input" id="imagen" name="imagen" type="file" accept="image/*">
             </div>
             <div class="flex w-full gap-3">
                 <div class="w-1/2 mb-4">

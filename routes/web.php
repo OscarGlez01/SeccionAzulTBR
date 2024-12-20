@@ -23,6 +23,8 @@ Route::middleware('auth')->group(function () {
     Route::resource('categorias', CategoriaController::class);
     Route::resource('subcategorias', SubcategoriaController::class);
     Route::resource('negocios', NegocioController::class);
+    // Ruta para hotswap de estado de negocio
+    Route::patch('/negocios/{id}/toggle-estado', [NegocioController::class, 'patchEstado'])->name('negocios.toggleEstado');
 
 });
 

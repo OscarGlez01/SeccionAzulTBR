@@ -41,8 +41,9 @@ class StoreNegocioRequest extends FormRequest
         $this->merge([
             'telefono' => $this->sanitizePhoneNumber($this->telefono),
             'whatsapp' => $this->sanitizePhoneNumber($this->whatsapp),
-            'estado' => $this->estado ?? 'inactivo', // Set default value if not provided.
-            'imagen' => $this->imagen ? trim($this->imagen) : null,
+            'estado' => $this->estado ?? 'inactivo',
+            'imagen' => $this->file('imagen'),
+
         ]);
     }
 

@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Categoria;
 use App\Models\Negocio;
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreNegocioRequest;
 use App\Http\Requests\UpdateNegocioRequest;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
 
 class NegocioController extends Controller
 {
@@ -29,9 +31,8 @@ class NegocioController extends Controller
      */
     public function store(StoreNegocioRequest $request)
     {
-        $imagePath = $this->handleImageUpload($request);
-
         try {
+            $imagePath = $this->handleImageUpload($request);
             $data = array_merge(
                 $request->validated(),
                 ['imagen' => $imagePath]
@@ -86,15 +87,14 @@ class NegocioController extends Controller
      */
     public function update(UpdateNegocioRequest $request, Negocio $negocio)
     {
-        $imagePath = $this->handleImageUpload($request);
-
+        $imagePath = $this->handleImageUpload($request, $negocio);
         try {
             $data = array_merge(
                 $request->validated(),
                 ['imagen' => $imagePath]
             );
 
-            $negocio = Negocio::update($data);
+            $negocio -> update($data);
             session()->flash('message', 'Negocio creado con exito');
             session()->flash('alert-class', 'success');
         } catch (\Exception $e) {
@@ -102,7 +102,7 @@ class NegocioController extends Controller
             session()->flash('alert-class', 'error');
         }
 
-        return to_route('negocios.index')->with('message', 'Negocio añadido.');
+        return to_route('negocios.index')->with('message', 'Negocio actualizado.');
     }
 
     /**
@@ -141,16 +141,30 @@ class NegocioController extends Controller
         // If an image is uploaded
         if ($request->hasFile('imagen')) {
             // If an existing negocio is passed, delete the old image (if exists)
-            if ($negocio && $negocio->imagen && Storage::exists('public/' . $negocio->imagen)) {
-                Storage::delete('public/' . $negocio->imagen);
+            if ($negocio && $negocio->imagen && Storage::exists($negocio->imagen)) {
+                Storage::delete($negocio->imagen);
             }
 
             // Store the new image in the public storage folder 'images'
-            return $request->file('imagen')->store('images', 'public');
+            return $request->file('imagen')->store('images', 'public');   
+        } else {
+            return $negocio ? $negocio->imagen : null; // For update, keep the old image if not updated
         }
+    }
 
-        // If no image is uploaded, return null (no change for update)
-        return $negocio ? $negocio->imagen : null; // For update, keep the old image if not updated
+
+    public function patchEstado(Request $request, $negocio_id)
+    {
+        $validated = $request->validate([
+            'estado' => ['required', Rule::in(['activo', 'inactivo'])],
+        ]);
+
+        $negocio = Negocio::findOrFail($negocio_id);
+        $negocio->estado = $validated['estado'];
+        $negocio->save();
+
+        return to_route('negocios.index')->with('message', 'Estado actualizado.');
+
     }
 
 }
