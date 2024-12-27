@@ -30,7 +30,8 @@
                                         <i class="fa-solid fa-trash"></i>
                                     </a>
                                 </div>
-                                <a href="{{ route('subcategorias.edit', $subcategoria) }}" class="btn-mini btn-warning">
+                                <a href="{{ route('subcategorias.edit', $subcategoria) }}"
+                                    class="btn-mini btn-warning">
                                     <i class="fa-solid fa-pen-to-square"></i>
                                 </a>
                             </td>
@@ -38,9 +39,10 @@
                     @endforeach
                 </tbody>
             </table>
+
         </div>
-        <div class="d-flex justify-content-center">
-            {{ $subcategorias->links() }}
+        <div class="">
+            {{ $subcategorias->links('pagination::tailwind') }}
         </div>
     </div>
 

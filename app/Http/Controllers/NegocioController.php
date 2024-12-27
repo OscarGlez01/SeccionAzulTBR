@@ -21,7 +21,7 @@ class NegocioController extends Controller
         $negocios = Negocio::query()
             ->with('categoria')
             ->orderBy('categoria_id')
-            ->paginate(10);
+            ->paginate(6);
 
         return view('negocio.index', ['negocios' => $negocios]);
     }

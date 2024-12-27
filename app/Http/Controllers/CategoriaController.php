@@ -15,7 +15,7 @@ class CategoriaController extends Controller
     {
         $categorias = Categoria::query()
             ->orderBy('categoria_id')
-            ->paginate(10);
+            ->paginate(6);
         return view('categoria.index', ['categorias' => $categorias]);
     }
 
