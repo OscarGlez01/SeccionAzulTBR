@@ -34,7 +34,7 @@ class Negocio extends Model
     }
     public function subcategorias()
     {
-        return $this->belongsToMany(Subcategoria::class, 'negocio_subcategoria');
+        return $this->belongsToMany(Subcategoria::class, 'negocio_subcategoria','negocio_id', 'subcategoria_id');
     }
 
     public function getImagenAttribute($value)

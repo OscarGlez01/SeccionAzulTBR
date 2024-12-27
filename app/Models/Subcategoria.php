@@ -25,7 +25,7 @@ class Subcategoria extends Model
     // Relación entre negocios y sub-categorias o etiquetas ( Un negocio puede contar con multiples subcategorias, las cuales a su vez estan relacionadas a una categoria y a otros negocios.)
     public function negocios()
     {
-        return $this->belongsToMany(Negocio::class, 'negocio_subcategoria');
+        return $this->belongsToMany(Negocio::class, 'negocio_subcategoria', 'subcategoria_id', 'negocio_id');
     }
 
 }

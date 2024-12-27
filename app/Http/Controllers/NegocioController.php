@@ -71,7 +71,13 @@ class NegocioController extends Controller
      */
     public function show(Negocio $negocio)
     {
-        //
+
+        $subcategorias = Subcategoria::where('categoria_id', $negocio->categoria_id)
+            ->orWhere('categoria_id', null)
+            ->get();
+
+        $subcategorias_escogidas = $negocio->subcategorias;
+        return view('negocio.show', ['negocio' => $negocio, 'subcategorias' => $subcategorias, 'subcategorias_escogidas' => $subcategorias_escogidas]);
     }
 
     /**
@@ -131,6 +137,22 @@ class NegocioController extends Controller
         }
 
         return redirect()->route('negocios.index');
+    }
+
+
+    /**
+     * Update the Negocio's subcategories
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Negocio $negocio
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function handleSubcategorias(Request $request, $negocio_id)
+    {
+        $negocio = Negocio::findOrFail($negocio_id);
+        $subcategoriasIds = json_decode($request->subcategorias, true);
+        $negocio->subcategorias()->sync($subcategoriasIds);
+        
+        return redirect()->back()->with('success', 'Attachments saved successfully!');
     }
 
 

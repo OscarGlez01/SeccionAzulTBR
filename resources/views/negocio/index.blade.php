@@ -53,6 +53,9 @@
                                 <a href="{{ route('negocios.edit', $negocio) }}" class="btn-mini btn-warning">
                                     <i class="fa-solid fa-pen-to-square"></i>
                                 </a>
+                                <a href="{{ route('negocios.show', $negocio) }}" class="btn-mini btn-see-more">
+                                    <i class="fa-solid fa-list"></i>
+                                </a>
                             </td>
                         </tr>
                     @endforeach

@@ -88,12 +88,7 @@
                         placeholder="Página de Instragram activa, de tenerla" />
                 </div>
             </div>
-            <div class="mb-2">
-                <button type="submit" class="btn btn-add">{{ __('Create') }}</button>
-                <a href="{{ route('negocios.index') }}">
-                    <button type="button" class="btn btn-cancel"> {{ __('Cancel') }} </button>
-                </a>
-            </div>
+
             @if ($errors->any())
                 <div
                     class="fade-in w-max rounded p-3 m-4 bg-red-300 border-red-400 border flex items-center text-red-500">
@@ -103,7 +98,13 @@
                         @endforeach
                     </ul>
                 </div>
-            @endif
+            @endif            
+            <div class="mb-2">
+                <button type="submit" class="btn btn-add">{{ __('Create') }}</button>
+                <a href="{{ route('negocios.index') }}">
+                    <button type="button" class="btn btn-cancel"> {{ __('Cancel') }} </button>
+                </a>
+            </div>
         </form>
 
     </div>

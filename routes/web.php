@@ -25,6 +25,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('negocios', NegocioController::class);
     // Ruta para hotswap de estado de negocio
     Route::patch('/negocios/{id}/toggle-estado', [NegocioController::class, 'patchEstado'])->name('negocios.toggleEstado');
+    Route::put('/negocios/{id}/handle-subcategorias', [NegocioController::class,'handleSubcategorias'])->name('negocios.handleSubcategorias');
 
 });
 
