@@ -98,7 +98,7 @@
                         @endforeach
                     </ul>
                 </div>
-            @endif            
+            @endif
             <div class="mb-2">
                 <button type="submit" class="btn btn-add">{{ __('Create') }}</button>
                 <a href="{{ route('negocios.index') }}">

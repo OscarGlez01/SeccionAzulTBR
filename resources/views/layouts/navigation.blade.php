@@ -8,7 +8,7 @@
                     <a href="{{ route('dashboard') }}">
                         <div class="flex items-center">
                             <img width="50px" height="auto" src="{{ url('/img/LogoLA_azul.svg') }}" />
-                            <h1 class="text-2xl md:text-sm md:max-w-28 ms-2 lg:text-lg lg:max-w-full text-black dark:text-gray-50">
+                            <h1 class="text-2xl xs:text-[1rem] md:text-sm md:max-w-28 ms-2 lg:text-lg lg:max-w-full text-black dark:text-gray-50">
                                 Directorio &#8226; Admin Panel
                             </h1>
                         </div>

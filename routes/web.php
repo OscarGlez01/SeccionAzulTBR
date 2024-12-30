@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoriaController;
+use App\Http\Controllers\ExplorerController;
 use App\Http\Controllers\NegocioController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SubcategoriaController;
@@ -25,7 +26,12 @@ Route::middleware('auth')->group(function () {
     Route::resource('negocios', NegocioController::class);
     // Ruta para hotswap de estado de negocio
     Route::patch('/negocios/{id}/toggle-estado', [NegocioController::class, 'patchEstado'])->name('negocios.toggleEstado');
+    // Ruta para etiquetar con subcategorias un negocio
     Route::put('/negocios/{id}/handle-subcategorias', [NegocioController::class,'handleSubcategorias'])->name('negocios.handleSubcategorias');
+    
+    
+    Route::get('/explorar', [ExplorerController::class, 'index'])->name('explore.index');
+
 
 });
 

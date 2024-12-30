@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
 
-    <div class="mx-auto my-5 max-w-screen-lg fadding-in">
+    <div class="mx-auto px-2 my-5 container lg:max-w-screen-lg fadding-in">
         <h1 class="text-xl text-black dark:text-white ">Editando el registro: {{ $categoria->nombre }}</h1>
         <hr class="my-4 border-gray-800 dark:border-neutral-400">
         <form action="{{ route('categorias.update', $categoria) }}" method="POST" class="form-crud">

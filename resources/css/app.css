@@ -45,6 +45,11 @@ html {
     }
 }
 
+
+.container {
+    @apply sm:max-w-[540px] md:max-w-[720px] lg:max-w-[960px] xl:max-w-[1140px] xxl:max-w-[1320px];
+}
+
 .home-index {
     height: 90dvh;
     @apply xs:h-5/6;
@@ -160,8 +165,7 @@ html {
 /** FOOTER INICIO **/
 
 .footer {
-    @apply dark:bg-slate-900 dark:text-gray-400 xs:h-40;
-    height: 10dvh;
+    @apply dark:bg-slate-900 dark:text-gray-400 h-[10dvh] xs:h-40;
     width: 100%;
     background-color: var(--sunflower-yellow);
     bottom: 0;
@@ -263,13 +267,13 @@ html {
     margin-bottom: 13.3px;
 }
 
-.container.principal {
-    padding-bottom: 80px;
-    padding-top: 80px;
+.principal {
+    padding: 80px 15px;
 }
 
 .secciones article {
     margin-top: 50px;
+    padding: 0 15px;
 }
 
 .secciones .seccion-item {
@@ -323,6 +327,10 @@ p.descripcion:hover .tooltip {
     color: var(--white);
     position: relative;
     z-index: 1;
+}
+
+.seccion-item .icon {
+    display: inline;
 }
 
 .secciones .seccion-item .icon {
@@ -585,6 +593,10 @@ p.descripcion:hover .tooltip {
     text-decoration: none !important;
 }
 
+.seccion-item-mobil.emergency {
+    @apply bg-red-500;
+}
+
 .seccion-item:hover {
     box-shadow: 0px 10px 20px -10px #f1db00;
 }
@@ -614,9 +626,8 @@ p.descripcion:hover .tooltip {
 
 .seccion-item-mobil .icon {
     width: 20px;
-    /*   height: 50.5px;*/
-
     padding-top: 2px;
+    display: inline;
 }
 
 @media (max-width: 600px) {

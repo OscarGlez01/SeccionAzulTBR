@@ -5,9 +5,9 @@
         </h2>
     </x-slot>
 
-    <div class="mx-auto mt-5 pb-12 max-w-screen-lg fadding-in">
+    <div class="mx-auto px-2 my-5 pb-12 container lg:max-w-screen-lg fadding-in">
         <h1 class="text-xl text-black dark:text-white ">Editar un registro</h1>
-        <hr class="my-4 border-gray-800 dark:border-neutral-400">
+        <hr class="my-4 border-gray-800 xs:border-neutral-100 dark:border-neutral-400">
         <form action="{{ route('negocios.update', $negocio) }}" method="POST" enctype="multipart/form-data"
             class="form-crud">
             @csrf

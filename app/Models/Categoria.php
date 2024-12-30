@@ -12,7 +12,9 @@ class Categoria extends Model
 
     protected $fillable = [
         'nombre',
-        'descripcion'
+        'descripcion',
+        'banner',
+        'logo'
     ];
 
     protected $primaryKey = "categoria_id";

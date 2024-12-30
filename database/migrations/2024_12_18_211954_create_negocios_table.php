@@ -23,7 +23,7 @@ return new class extends Migration {
             $table->string('contacto_extra')->nullable();
             $table->enum('estado', ['activo','inactivo'])->default('inactivo');
             $table->string('imagen')->nullable();
-            $table->foreignId(column: 'categoria_id')->index()->constrained('categorias', 'categoria_id')->onDelete('cascade');
+            $table->foreignId( 'categoria_id')->index()->constrained('categorias', 'categoria_id')->onDelete('cascade');
             $table->timestamps();
         });
     }
