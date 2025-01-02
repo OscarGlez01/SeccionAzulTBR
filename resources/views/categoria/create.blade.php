@@ -46,14 +46,25 @@
                     {{ __('Reset Image') }}
                 </button>
             </div>
-            <div x-data="iconSelector()" class="p-4">
-                <!-- Search Input -->
-                <label for="icon-search" class="block text-sm font-medium">Search Icons:</label>
-                <input id="icon-search" type="text" x-model="searchQuery" @input="filterIcons"
-                    placeholder="Search for an icon..." class="border p-2 w-full rounded mb-4" />
 
+            <div x-data="iconSelector()" class="">
+                <!-- Search Input with Suggestions -->
+                <label for="icon-search" class="block text-sm font-medium">Search Icons:</label>
+                <div class="relative">
+                    <input id="icon-search" type="text" x-model="searchQuery" @input="filterIcons"
+                        placeholder="Search for an icon..." class="border p-2 w-full rounded mb-4" />
+                    <ul x-show="suggestions.length" class="absolute bg-white border rounded w-full max-h-40 overflow-y-auto z-10">
+                        <template x-for="suggestion in suggestions" :key="suggestion">
+                            <li @click="selectSuggestion(suggestion)" class="p-2 cursor-pointer hover:bg-gray-200">
+                                <span x-text="suggestion"></span>
+                            </li>
+                        </template>
+                    </ul>
+                </div>
+            
+                <!-- Icons Display Grid -->
                 <div class="grid grid-cols-6 gap-4 max-h-64 overflow-y-auto border p-2 rounded">
-                    <template x-for="icon in filteredIcons" :key="icon">
+                    <template x-for="icon in visibleIcons" :key="icon">
                         <div class="flex flex-col items-center justify-center border p-2 rounded cursor-pointer hover:bg-gray-200"
                             @click="selectIcon(icon)" :class="selectedIcon === icon ? 'bg-blue-100' : ''">
                             <i :class="icon" class="text-xl"></i>
@@ -61,7 +72,7 @@
                         </div>
                     </template>
                 </div>
-
+            
                 <!-- Selected Icon Preview -->
                 <div class="mt-4">
                     <h3 class="text-sm font-medium">Selected Icon:</h3>
@@ -70,10 +81,12 @@
                         <span x-text="selectedIcon || 'No icon selected'" class="text-sm"></span>
                     </div>
                 </div>
-
+            
                 <!-- Hidden Input to Submit the Selected Icon -->
                 <input type="hidden" name="logo" :value="selectedIcon">
             </div>
+
+            <!-- Options Item Rack -->
             <div class="mb-2">
                 <button type="submit" class="btn btn-add">{{ __('Create') }}</button>
                 <a href="{{ route('categorias.index') }}">
@@ -99,35 +112,52 @@
     function iconSelector() {
         return {
             searchQuery: '',
-            icons: [
-                'fa-solid fa-home',
-                'fa-solid fa-user',
-                'fa-solid fa-envelope',
-                'fa-solid fa-phone',
-                'fa-solid fa-cog',
-                'fa-solid fa-heart',
-                'fa-solid fa-star',
-                'fa-solid fa-trash',
-                'fa-solid fa-camera',
-                'fa-solid fa-car',
-                // Add more FontAwesome icons here
-            ],
+            icons: [],
             filteredIcons: [],
+            visibleIcons: [],
+            suggestions: [],
             selectedIcon: null,
+            iconsPerPage: 36,
+            currentPage: 1,
+
+            async init() {
+                // Fetch the icon list from a JSON file
+                const response = await fetch('/storage/fontawesome_icons.json');
+                this.icons = await response.json();
+                this.filteredIcons = this.icons;
+                this.loadVisibleIcons();
+            },
 
             filterIcons() {
+                this.suggestions = this.icons.filter(icon =>
+                    icon.toLowerCase().includes(this.searchQuery.toLowerCase())
+                ).slice(0, 10); // Limit suggestions to 10
+
                 this.filteredIcons = this.icons.filter(icon =>
                     icon.toLowerCase().includes(this.searchQuery.toLowerCase())
                 );
+                this.currentPage = 1;
+                this.loadVisibleIcons();
+            },
+
+            loadVisibleIcons() {
+                const start = (this.currentPage - 1) * this.iconsPerPage;
+                const end = start + this.iconsPerPage;
+                this.visibleIcons = this.filteredIcons.slice(0, end);
+            },
+
+            loadMoreIcons() {
+                this.currentPage++;
+                this.loadVisibleIcons();
             },
 
             selectIcon(icon) {
                 this.selectedIcon = icon;
             },
 
-            init() {
-                // Initialize filteredIcons with the full list of icons
-                this.filteredIcons = this.icons;
+            selectSuggestion(suggestion) {
+                this.searchQuery = suggestion;
+                this.filterIcons();
             }
         };
     }
