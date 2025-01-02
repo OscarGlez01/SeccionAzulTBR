@@ -24,4 +24,9 @@ class Categoria extends Model
         return $this->hasMany(Subcategoria::class, 'categoria_id');
     }
 
+    public function getBannerAttribute($value)
+    {
+        return $value ?: '/placeholders/thumbnail_negocio.png';
+    }
+
 }

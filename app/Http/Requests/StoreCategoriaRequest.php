@@ -25,7 +25,9 @@ class StoreCategoriaRequest extends FormRequest
     {
         return [
             'nombre' => 'required|string|max:255|unique:categorias,nombre',
-            'descripcion' => 'nullable|string|max:500'
+            'descripcion' => 'nullable|string|max:500',
+            'banner' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg',
+            'logo' => 'nullable|string'
         ];
     }
 
@@ -38,6 +40,8 @@ class StoreCategoriaRequest extends FormRequest
         $this->merge([
             'nombre' => Str::limit(ucwords(trim($this->input('nombre'))), 255, ''),
             'descripcion' => Str::limit(strip_tags(trim($this->input('descripcion'))), 500, ''),
+            'banner' => $this->file('banner'),
+            'logo' => Str::limit($this->input('logo'), 255, '')
         ]);
     }
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Categoria;
 use App\Http\Requests\StoreCategoriaRequest;
 use App\Http\Requests\UpdateCategoriaRequest;
+use Illuminate\Support\Facades\Storage;
 
 class CategoriaController extends Controller
 {
@@ -25,15 +26,15 @@ class CategoriaController extends Controller
     public function store(StoreCategoriaRequest $request)
     {
         try {
-            if ($categoria = Categoria::create($request->validated())) {
-                // Update is successful
-                session()->flash('message', 'Categoría creada con exito.');
-                session()->flash('alert-class', 'success');
-            } else {
-                // Failsafe: Something's wrong
-                session()->flash('message', 'Fallo al crear la categoría.');
-                session()->flash('alert-class', 'error');
-            }
+            $imagePath = $this->handleImageUpload($request);
+            $data = array_merge(
+                $request->validated(),
+                ['banner' => $imagePath]
+            );
+            $categoria = Categoria::create($data);
+
+            session()->flash('message', 'Categoría creada con exito.');
+            session()->flash('alert-class', 'success');
         } catch (\Exception $e) {
             session()->flash('message', 'Ocurrió un error: ' . $e->getMessage());
             session()->flash('alert-class', 'error');
@@ -46,7 +47,14 @@ class CategoriaController extends Controller
      */
     public function create()
     {
-        return view('categoria.create');
+        $iconosDisponibles = [
+            'fa-solid fa-user',
+            'fa-solid fa-cog',
+            'fa-solid fa-heart',
+            'fa-solid fa-check',
+            'fa-solid fa-camera',
+        ];
+        return view('categoria.create', ['iconosDisponibles' => $iconosDisponibles] );
     }
 
 
@@ -65,15 +73,20 @@ class CategoriaController extends Controller
     public function update(UpdateCategoriaRequest $request, Categoria $categoria)
     {
         try {
-            if ($categoria->update($request->validated())) {
-                // Update is successful
-                session()->flash('message', 'Categoría actualizada con exito.');
-                session()->flash('alert-class', 'success');
-            } else {
-                // Failsafe: Something's wrong
-                session()->flash('message', 'Fallo al editar la categoría.');
-                session()->flash('alert-class', 'error');
-            }
+
+            $imagePath = $this->handleImageUpload($request, $categoria);
+
+            $data = array_merge(
+                $request->validated(),
+                ['banner' => $imagePath]
+            );
+
+            $categoria->update($data);
+
+            // Update is successful
+            session()->flash('message', 'Categoría actualizada con exito.');
+            session()->flash('alert-class', 'success');
+
         } catch (\Exception $e) {
             // Handle exceptions
             session()->flash('message', 'Ocurrió un error: ' . $e->getMessage());
@@ -116,4 +129,27 @@ class CategoriaController extends Controller
 
         return redirect()->route('categorias.index');
     }
+
+    /**
+     * Summary of handleImageUpload
+     * @param  \Illuminate\Http\Request  $request
+     * @return string|null
+     */
+    private function handleImageUpload($request, $categoria = null)
+    {
+        // If an image is uploaded
+        if ($request->hasFile('banner')) {
+          
+            // If an existing negocio is passed, delete the old image (if exists)
+            if ($categoria && $categoria->banner && Storage::exists($categoria->banner)) {
+                Storage::delete($categoria->banner);
+            }
+
+            // Store the new image in the public storage folder 'images'
+            return $request->file('banner')->store('images/banners', 'public');
+        } else {
+            return $categoria ? $categoria->banner : null; // For update, keep the old image if not updated
+        }
+    }
+
 }

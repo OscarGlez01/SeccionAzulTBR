@@ -13,6 +13,7 @@
                     <tr class="">
                         <th>{{ __('Name') }}</th>
                         <th>{{ __('Description') }}</th>
+                        <th>{{ __('Banner') }}</th>
                         <th>{{ __('Actions') }}</th>
                     </tr>
                 </thead>
@@ -21,6 +22,9 @@
                         <tr class="content-row">
                             <td>{{ $categoria->nombre }} </td>
                             <td>{{ $categoria->descripcion }} </td>
+                            <td><img width="60" height="auto" class="rounded"
+                                    src="{{ asset('storage/' . $categoria->banner) }}"
+                                    alt="img#{{ $categoria->banner }}" /></td>
                             <td>
                                 <div style="cursor: pointer;" class="inline-flex" x-data="{ categoria: {{ $categoria }} }">
                                     <a type="button" class="btn-mini btn-cancel"

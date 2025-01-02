@@ -39,7 +39,7 @@ class Negocio extends Model
 
     public function getImagenAttribute($value)
     {
-        return $value ?: 'thumbnail_negocio.png';
+        return $value ?: '/placeholders/thumbnail_negocio.png';
     }
 
 }
