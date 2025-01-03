@@ -54,7 +54,7 @@ class CategoriaController extends Controller
             'fa-solid fa-check',
             'fa-solid fa-camera',
         ];
-        return view('categoria.create', ['iconosDisponibles' => $iconosDisponibles] );
+        return view('categoria.create', ['iconosDisponibles' => $iconosDisponibles]);
     }
 
 
@@ -137,19 +137,24 @@ class CategoriaController extends Controller
      */
     private function handleImageUpload($request, $categoria = null)
     {
-        // If an image is uploaded
-        if ($request->hasFile('banner')) {
-          
-            // If an existing negocio is passed, delete the old image (if exists)
+        // En caso de que el usuario requiera borrar la imagen, se procesa el input.
+        if ($request->input('delete_banner') === 'true') {
             if ($categoria && $categoria->banner && Storage::exists($categoria->banner)) {
-                Storage::delete($categoria->banner);
+                Storage::delete($categoria->banner); // Borra el registro de imagen
             }
-
-            // Store the new image in the public storage folder 'images'
-            return $request->file('banner')->store('images/banners', 'public');
-        } else {
-            return $categoria ? $categoria->banner : null; // For update, keep the old image if not updated
+            return null; // Ajusta el valor en la base de datos cómo núlo.
         }
+
+        // En caso de una nueva subida
+        if ($request->hasFile('banner')) {
+            if ($categoria && $categoria->banner && Storage::exists($categoria->banner)) {
+                Storage::delete($categoria->banner); // Borra la última imagen.
+            }
+            return $request->file('banner')->store('images/banners', 'public');
+        }
+
+        // Manten el banner anterior si es que lo tiene.
+        return $categoria ? $categoria->banner : null;
     }
 
 }

@@ -14,6 +14,7 @@ class UpdateCategoriaRequest extends StoreCategoriaRequest
 
         // Adjust 'name' rule to exclude the current record
         $rules['nombre'] = 'sometimes|string|max:255|unique:categorias,nombre,' . $this->route('categoria')->categoria_id . ',categoria_id';
+        $rules['delete_banner'] = 'nullable|in:true';
 
         return $rules;
     }

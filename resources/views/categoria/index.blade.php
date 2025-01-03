@@ -22,9 +22,13 @@
                         <tr class="content-row">
                             <td>{{ $categoria->nombre }} </td>
                             <td>{{ $categoria->descripcion }} </td>
-                            <td><img width="60" height="auto" class="rounded"
-                                    src="{{ asset('storage/' . $categoria->banner) }}"
-                                    alt="img#{{ $categoria->banner }}" /></td>
+                            <td>
+                                <div class="thumbnail-with-icon"
+                                    style="background-image: url('{{ $categoria->banner ? asset('storage/' . $categoria->banner) : asset('storage/placeholder/thumbnail_negocio.png') }}')">
+                                    <div class="w-full h-full flex justify-center items-center"><i
+                                            class="{{ $categoria->logo }}"></i></div>
+                                </div>
+                            </td>
                             <td>
                                 <div style="cursor: pointer;" class="inline-flex" x-data="{ categoria: {{ $categoria }} }">
                                     <a type="button" class="btn-mini btn-cancel"

@@ -46,11 +46,11 @@
 }
 
 .crud-table tr.content-row {
-    @apply text-slate-500 dark:text-slate-400
+    @apply text-slate-500 dark:text-slate-400;
 }
 
 .crud-table tr:hover.content-row {
-    @apply transition-all duration-200 bg-slate-200 dark:text-black
+    @apply transition-all duration-200 bg-slate-200 dark:text-black;
 }
 
 /* Forms */
@@ -64,17 +64,21 @@ form.form-crud {
     @apply block text-gray-700 text-sm font-bold mb-2 dark:text-white;
 }
 
-select.form-crud-input, input.form-crud-input, textarea.form-crud-input {
+select.form-crud-input,
+input.form-crud-input,
+textarea.form-crud-input {
     @apply shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:ring;
 }
 
-input[type='checkbox'].checkbox-toggle, input[type='checkbox'].checkbox-toggle:checked {
+input[type="checkbox"].checkbox-toggle,
+input[type="checkbox"].checkbox-toggle:checked {
     @apply dark:border-white;
     background-image: none;
     background-color: transparent;
 }
 
-input[type='checkbox'].checkbox-toggle:checked:hover, tr:hover input[type='checkbox'].checkbox-toggle{
+input[type="checkbox"].checkbox-toggle:checked:hover,
+tr:hover input[type="checkbox"].checkbox-toggle {
     @apply border-black bg-transparent dark:border-black;
 }
 
@@ -84,6 +88,24 @@ tr:hover span.peerless {
 
 .fadding-in {
     animation: fade-in 0.5s ease;
+}
+
+.thumbnail-with-icon {
+    background-size: cover;
+    display: flex;
+    width: 60px;
+    height: 60px;
+    border-radius: 10px;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: x-large;
+    background-repeat: no-repeat;
+}
+
+.thumbnail-with-icon>div {
+    background-color: rgba(0 ,0, 0 ,0.2);
+    border-radius: 10px;
 }
 
 @keyframes fade-in {

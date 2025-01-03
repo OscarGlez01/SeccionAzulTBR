@@ -22,7 +22,7 @@
                     {{ __('Description') }}
                 </label>
                 <input class="form-crud-input" id="descripcion" name="descripcion" type="text"
-                    placeholder="Describe la categoría" />
+                    placeholder="Describe brevemente la categoría" />
             </div>
 
             <div x-data="{
@@ -38,7 +38,7 @@
                     @change="imagePreview = $refs.fileInput.files[0] ? URL.createObjectURL($refs.fileInput.files[0]) : ''">
                 <div class="my-4">
                     <template x-if="imagePreview">
-                        <img :src="imagePreview" alt="Image preview" width="150">
+                        <img :src="imagePreview" alt="Image preview" width="150" height="auto">
                     </template>
                 </div>
                 <!-- Reset the image preview -->
@@ -47,23 +47,18 @@
                 </button>
             </div>
 
-            <div x-data="iconSelector()" class="">
+            <div x-data="iconSelector()" class="py-4">
                 <!-- Search Input with Suggestions -->
-                <label for="icon-search" class="block text-sm font-medium">Search Icons:</label>
-                <div class="relative">
-                    <input id="icon-search" type="text" x-model="searchQuery" @input="filterIcons"
-                        placeholder="Search for an icon..." class="border p-2 w-full rounded mb-4" />
-                    <ul x-show="suggestions.length" class="absolute bg-white border rounded w-full max-h-40 overflow-y-auto z-10">
-                        <template x-for="suggestion in suggestions" :key="suggestion">
-                            <li @click="selectSuggestion(suggestion)" class="p-2 cursor-pointer hover:bg-gray-200">
-                                <span x-text="suggestion"></span>
-                            </li>
-                        </template>
-                    </ul>
+                <div>
+                    <label for="icon-search" class="block text-md font-medium">Logo</label>
+                    <div class="relative">
+                        <input id="icon-search" type="text" x-model="searchQuery" @input="filterIcons"
+                            placeholder="Search for an icon..." class="border p-2 w-full rounded" />
+                    </div>
                 </div>
-            
+
                 <!-- Icons Display Grid -->
-                <div class="grid grid-cols-6 gap-4 max-h-64 overflow-y-auto border p-2 rounded">
+                <div class="grid grid-cols-6 gap-4 max-h-64 overflow-y-auto border p-2 mt-4 rounded">
                     <template x-for="icon in visibleIcons" :key="icon">
                         <div class="flex flex-col items-center justify-center border p-2 rounded cursor-pointer hover:bg-gray-200"
                             @click="selectIcon(icon)" :class="selectedIcon === icon ? 'bg-blue-100' : ''">
@@ -72,7 +67,7 @@
                         </div>
                     </template>
                 </div>
-            
+
                 <!-- Selected Icon Preview -->
                 <div class="mt-4">
                     <h3 class="text-sm font-medium">Selected Icon:</h3>
@@ -81,7 +76,7 @@
                         <span x-text="selectedIcon || 'No icon selected'" class="text-sm"></span>
                     </div>
                 </div>
-            
+
                 <!-- Hidden Input to Submit the Selected Icon -->
                 <input type="hidden" name="logo" :value="selectedIcon">
             </div>
@@ -117,11 +112,11 @@
             visibleIcons: [],
             suggestions: [],
             selectedIcon: null,
-            iconsPerPage: 36,
+            iconsPerPage: 227,
             currentPage: 1,
 
             async init() {
-                // Fetch the icon list from a JSON file
+                // Leer inconos desde un JSON en Storage
                 const response = await fetch('/storage/fontawesome_icons.json');
                 this.icons = await response.json();
                 this.filteredIcons = this.icons;
@@ -129,10 +124,6 @@
             },
 
             filterIcons() {
-                this.suggestions = this.icons.filter(icon =>
-                    icon.toLowerCase().includes(this.searchQuery.toLowerCase())
-                ).slice(0, 10); // Limit suggestions to 10
-
                 this.filteredIcons = this.icons.filter(icon =>
                     icon.toLowerCase().includes(this.searchQuery.toLowerCase())
                 );
